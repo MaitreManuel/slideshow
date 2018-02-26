@@ -25,7 +25,7 @@ const init = () => {
 
   sliderRight.querySelector('.slider').innerHTML = '';
   for (let i = 0; i < maxItems; i++) {
-    $(reverseItems[i]).appendTo($('.slider', sliderRight));
+    sliderRight.querySelector('.slider').appendChild(reverseItems[i]);
   }
 
   slider.classList.add('slideshow-left');
@@ -39,11 +39,10 @@ const init = () => {
     speed: 1000,
     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
   }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-
-    if (currentSlide > nextSlide && nextSlide == 0 && currentSlide == maxItems - 1) {
+    if (currentSlide > nextSlide && nextSlide === 0 && currentSlide === maxItems - 1) {
       $('.slideshow-right .slider').slick('slickGoTo', -1);
       $('.slideshow-text').slick('slickGoTo', maxItems);
-    } else if (currentSlide < nextSlide && currentSlide == 0 && nextSlide == maxItems - 1) {
+    } else if (currentSlide < nextSlide && currentSlide === 0 && nextSlide === maxItems - 1) {
       $('.slideshow-right .slider').slick('slickGoTo', maxItems);
       $('.slideshow-text').slick('slickGoTo', -1);
     } else {
