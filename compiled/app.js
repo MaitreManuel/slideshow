@@ -133,83 +133,95 @@ __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var $slider = (0, _jquery2.default)('.slideshow .slider'),
-    maxItems = (0, _jquery2.default)('.item', $slider).length,
-    dragging = false,
-    tracking = void 0,
-    rightTracking = void 0;
+// DOM Ready
+window.onload = function () {
+  init();
+};
 
-var $sliderRight = (0, _jquery2.default)('.slideshow').clone().addClass('slideshow-right').appendTo((0, _jquery2.default)('.split-slideshow'));
+// Functions
+var init = function init() {
+  var tracking = void 0,
+      rightTracking = void 0,
+      dragging = false,
+      slider = document.querySelector('.slideshow .slider'),
+      maxItems = document.querySelectorAll('.slideshow-text .item').length,
+      sliderRight = document.querySelector('.slideshow').cloneNode(true);
 
-var rightItems = (0, _jquery2.default)('.item', $sliderRight).toArray();
-var reverseItems = rightItems.reverse();
-(0, _jquery2.default)('.slider', $sliderRight).html('');
-for (var i = 0; i < maxItems; i++) {
-  (0, _jquery2.default)(reverseItems[i]).appendTo((0, _jquery2.default)('.slider', $sliderRight));
-}
+  sliderRight.classList.value = sliderRight.classList.value.concat(' slideshow-right');
+  document.querySelector('.split-slideshow').appendChild(sliderRight);
 
-$slider.addClass('slideshow-left');
-(0, _jquery2.default)('.slideshow-left').slick({
-  vertical: true,
-  verticalSwiping: true,
-  arrows: false,
-  infinite: true,
-  dots: true,
-  speed: 1000,
-  cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-}).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+  var rightItems = Array.from(sliderRight.querySelectorAll('.item')),
+      reverseItems = rightItems.reverse();
 
-  if (currentSlide > nextSlide && nextSlide == 0 && currentSlide == maxItems - 1) {
-    (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', -1);
-    (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', maxItems);
-  } else if (currentSlide < nextSlide && currentSlide == 0 && nextSlide == maxItems - 1) {
-    (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems);
-    (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', -1);
-  } else {
-    (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems - 1 - nextSlide);
-    (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', nextSlide);
+  sliderRight.querySelector('.slider').innerHTML = '';
+  for (var i = 0; i < maxItems; i++) {
+    (0, _jquery2.default)(reverseItems[i]).appendTo((0, _jquery2.default)('.slider', sliderRight));
   }
-}).on("mousewheel", function (event) {
-  event.preventDefault();
-  if (event.deltaX > 0 || event.deltaY < 0) {
-    (0, _jquery2.default)(this).slick('slickNext');
-  } else if (event.deltaX < 0 || event.deltaY > 0) {
-    (0, _jquery2.default)(this).slick('slickPrev');
-  };
-}).on('mousedown touchstart', function () {
-  dragging = true;
-  tracking = (0, _jquery2.default)('.slick-track', $slider).css('transform');
-  tracking = parseInt(tracking.split(',')[5]);
-  rightTracking = (0, _jquery2.default)('.slideshow-right .slick-track').css('transform');
-  rightTracking = parseInt(rightTracking.split(',')[5]);
-}).on('mousemove touchmove', function () {
-  if (dragging) {
-    newTracking = (0, _jquery2.default)('.slideshow-left .slick-track').css('transform');
-    newTracking = parseInt(newTracking.split(',')[5]);
-    diffTracking = newTracking - tracking;
-    (0, _jquery2.default)('.slideshow-right .slick-track').css({ 'transform': 'matrix(1, 0, 0, 1, 0, ' + (rightTracking - diffTracking) + ')' });
-  }
-}).on('mouseleave touchend mouseup', function () {
-  dragging = false;
-});
 
-(0, _jquery2.default)('.slideshow-right .slider').slick({
-  swipe: false,
-  vertical: true,
-  arrows: false,
-  infinite: true,
-  speed: 950,
-  cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
-  initialSlide: maxItems - 1
-});
-(0, _jquery2.default)('.slideshow-text').slick({
-  swipe: false,
-  vertical: true,
-  arrows: false,
-  infinite: true,
-  speed: 900,
-  cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-});
+  slider.classList.add('slideshow-left');
+
+  (0, _jquery2.default)('.slideshow-left').slick({
+    vertical: true,
+    verticalSwiping: true,
+    arrows: false,
+    infinite: true,
+    dots: true,
+    speed: 1000,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+  }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+
+    if (currentSlide > nextSlide && nextSlide == 0 && currentSlide == maxItems - 1) {
+      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', -1);
+      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', maxItems);
+    } else if (currentSlide < nextSlide && currentSlide == 0 && nextSlide == maxItems - 1) {
+      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems);
+      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', -1);
+    } else {
+      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems - 1 - nextSlide);
+      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', nextSlide);
+    }
+  }).on('mousewheel', function (event) {
+    event.preventDefault();
+    if (event.deltaX > 0 || event.deltaY < 0) {
+      (0, _jquery2.default)(this).slick('slickNext');
+    } else if (event.deltaX < 0 || event.deltaY > 0) {
+      (0, _jquery2.default)(this).slick('slickPrev');
+    }
+  }).on('mousedown touchstart', function () {
+    dragging = true;
+    tracking = (0, _jquery2.default)('.slick-track', slider).css('transform');
+    tracking = parseInt(tracking.split(',')[5]);
+    rightTracking = (0, _jquery2.default)('.slideshow-right .slick-track').css('transform');
+    rightTracking = parseInt(rightTracking.split(',')[5]);
+  }).on('mousemove touchmove', function () {
+    if (dragging) {
+      var newTracking = (0, _jquery2.default)('.slideshow-left .slick-track').css('transform');
+      newTracking = parseInt(newTracking.split(',')[5]);
+      var diffTracking = newTracking - tracking;
+      (0, _jquery2.default)('.slideshow-right .slick-track').css({ 'transform': 'matrix(1, 0, 0, 1, 0, ' + (rightTracking - diffTracking) + ')' });
+    }
+  }).on('mouseleave touchend mouseup', function () {
+    dragging = false;
+  });
+
+  (0, _jquery2.default)('.slideshow-right .slider').slick({
+    swipe: false,
+    vertical: true,
+    arrows: false,
+    infinite: true,
+    speed: 950,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+    initialSlide: maxItems - 1
+  });
+  (0, _jquery2.default)('.slideshow-text').slick({
+    swipe: false,
+    vertical: true,
+    arrows: false,
+    infinite: true,
+    speed: 900,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+  });
+};
 
 /***/ }),
 /* 4 */
