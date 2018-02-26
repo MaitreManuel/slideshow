@@ -155,7 +155,7 @@ var init = function init() {
 
   sliderRight.querySelector('.slider').innerHTML = '';
   for (var i = 0; i < maxItems; i++) {
-    (0, _jquery2.default)(reverseItems[i]).appendTo((0, _jquery2.default)('.slider', sliderRight));
+    sliderRight.querySelector('.slider').appendChild(reverseItems[i]);
   }
 
   slider.classList.add('slideshow-left');
@@ -169,11 +169,10 @@ var init = function init() {
     speed: 1000,
     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
   }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-
-    if (currentSlide > nextSlide && nextSlide == 0 && currentSlide == maxItems - 1) {
+    if (currentSlide > nextSlide && nextSlide === 0 && currentSlide === maxItems - 1) {
       (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', -1);
       (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', maxItems);
-    } else if (currentSlide < nextSlide && currentSlide == 0 && nextSlide == maxItems - 1) {
+    } else if (currentSlide < nextSlide && currentSlide === 0 && nextSlide === maxItems - 1) {
       (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems);
       (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', -1);
     } else {
