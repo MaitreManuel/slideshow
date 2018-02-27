@@ -12,7 +12,7 @@ return webpackJsonp_name_([0],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["jQuery"] = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["jQuery"] = __webpack_require__(5);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
@@ -56,18 +56,18 @@ module.exports = __webpack_require__(3);
 "use strict";
 
 
-var _initialize = __webpack_require__(9);
+var _initialize = __webpack_require__(4);
 
-var _initialize2 = _interopRequireDefault(_initialize);
+var Slideshow = _interopRequireWildcard(_initialize);
 
-__webpack_require__(8);
+__webpack_require__(9);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // DOM Ready
 // import scripts
 window.onload = function () {
-  _initialize2.default.init();
+  Slideshow.init();
 };
 
 // import styles
@@ -76,11 +76,113 @@ window.onload = function () {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["$"] = __webpack_require__(5);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+"use strict";
+
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+__webpack_require__(7);
+
+__webpack_require__(8);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.init = function () {
+  var tracking = void 0,
+      rightTracking = void 0,
+      dragging = false,
+      slider = document.querySelector('.slideshow .slider'),
+      maxItems = document.querySelectorAll('.slideshow-text .item').length,
+      sliderRight = document.querySelector('.slideshow').cloneNode(true);
+
+  sliderRight.classList.value = sliderRight.classList.value.concat(' slideshow-right');
+  document.querySelector('.split-slideshow').appendChild(sliderRight);
+
+  var rightItems = Array.from(sliderRight.querySelectorAll('.item')),
+      reverseItems = rightItems.reverse();
+
+  sliderRight.querySelector('.slider').innerHTML = '';
+  for (var i = 0; i < maxItems; i++) {
+    sliderRight.querySelector('.slider').appendChild(reverseItems[i]);
+  }
+
+  slider.classList.add('slideshow-left');
+
+  (0, _jquery2.default)('.slideshow-left').slick({
+    arrows: false,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    vertical: true,
+    verticalSwiping: true
+  }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+    if (currentSlide > nextSlide && nextSlide === 0 && currentSlide === maxItems - 1) {
+      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', -1);
+      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', maxItems);
+    } else if (currentSlide < nextSlide && currentSlide === 0 && nextSlide === maxItems - 1) {
+      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems);
+      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', -1);
+    } else {
+      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems - 1 - nextSlide);
+      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', nextSlide);
+    }
+  }).on('mousewheel', function (event) {
+    event.preventDefault();
+    if (event.deltaX > 0 || event.deltaY < 0) {
+      (0, _jquery2.default)(this).slick('slickNext');
+    } else if (event.deltaX < 0 || event.deltaY > 0) {
+      (0, _jquery2.default)(this).slick('slickPrev');
+    }
+  }).on('mousedown touchstart', function () {
+    dragging = true;
+    tracking = (0, _jquery2.default)('.slick-track', slider).css('transform');
+    tracking = parseInt(tracking.split(',')[5]);
+    rightTracking = (0, _jquery2.default)('.slideshow-right .slick-track').css('transform');
+    rightTracking = parseInt(rightTracking.split(',')[5]);
+  }).on('mousemove touchmove', function () {
+    if (dragging) {
+      var newTracking = (0, _jquery2.default)('.slideshow-left .slick-track').css('transform');
+      newTracking = parseInt(newTracking.split(',')[5]);
+      var diffTracking = newTracking - tracking;
+      (0, _jquery2.default)('.slideshow-right .slick-track').css({ 'transform': 'matrix(1, 0, 0, 1, 0, ' + (rightTracking - diffTracking) + ')' });
+    }
+  }).on('mouseleave touchend mouseup', function () {
+    dragging = false;
+  });
+
+  (0, _jquery2.default)('.slideshow-right .slider').slick({
+    arrows: false,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+    infinite: true,
+    initialSlide: maxItems - 1,
+    speed: 950,
+    swipe: false,
+    vertical: true
+  });
+  (0, _jquery2.default)('.slideshow-text').slick({
+    arrows: false,
+    adaptiveHeight: true,
+    centerPadding: '500px',
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+    infinite: true,
+    speed: 900,
+    swipe: false,
+    vertical: true
+  });
+};
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["$"] = __webpack_require__(6);
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10451,7 +10553,7 @@ return jQuery;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10681,7 +10783,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -13701,110 +13803,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-__webpack_require__(6);
-
-__webpack_require__(7);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.init = function () {
-  var tracking = void 0,
-      rightTracking = void 0,
-      dragging = false,
-      slider = document.querySelector('.slideshow .slider'),
-      maxItems = document.querySelectorAll('.slideshow-text .item').length,
-      sliderRight = document.querySelector('.slideshow').cloneNode(true);
-
-  sliderRight.classList.value = sliderRight.classList.value.concat(' slideshow-right');
-  document.querySelector('.split-slideshow').appendChild(sliderRight);
-
-  var rightItems = Array.from(sliderRight.querySelectorAll('.item')),
-      reverseItems = rightItems.reverse();
-
-  sliderRight.querySelector('.slider').innerHTML = '';
-  for (var i = 0; i < maxItems; i++) {
-    sliderRight.querySelector('.slider').appendChild(reverseItems[i]);
-  }
-
-  slider.classList.add('slideshow-left');
-
-  (0, _jquery2.default)('.slideshow-left').slick({
-    vertical: true,
-    verticalSwiping: true,
-    arrows: false,
-    infinite: true,
-    dots: true,
-    speed: 1000,
-    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-  }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-    if (currentSlide > nextSlide && nextSlide === 0 && currentSlide === maxItems - 1) {
-      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', -1);
-      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', maxItems);
-    } else if (currentSlide < nextSlide && currentSlide === 0 && nextSlide === maxItems - 1) {
-      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems);
-      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', -1);
-    } else {
-      (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', maxItems - 1 - nextSlide);
-      (0, _jquery2.default)('.slideshow-text').slick('slickGoTo', nextSlide);
-    }
-  }).on('mousewheel', function (event) {
-    event.preventDefault();
-    if (event.deltaX > 0 || event.deltaY < 0) {
-      (0, _jquery2.default)(this).slick('slickNext');
-    } else if (event.deltaX < 0 || event.deltaY > 0) {
-      (0, _jquery2.default)(this).slick('slickPrev');
-    }
-  }).on('mousedown touchstart', function () {
-    dragging = true;
-    tracking = (0, _jquery2.default)('.slick-track', slider).css('transform');
-    tracking = parseInt(tracking.split(',')[5]);
-    rightTracking = (0, _jquery2.default)('.slideshow-right .slick-track').css('transform');
-    rightTracking = parseInt(rightTracking.split(',')[5]);
-  }).on('mousemove touchmove', function () {
-    if (dragging) {
-      var newTracking = (0, _jquery2.default)('.slideshow-left .slick-track').css('transform');
-      newTracking = parseInt(newTracking.split(',')[5]);
-      var diffTracking = newTracking - tracking;
-      (0, _jquery2.default)('.slideshow-right .slick-track').css({ 'transform': 'matrix(1, 0, 0, 1, 0, ' + (rightTracking - diffTracking) + ')' });
-    }
-  }).on('mouseleave touchend mouseup', function () {
-    dragging = false;
-  });
-
-  (0, _jquery2.default)('.slideshow-right .slider').slick({
-    swipe: false,
-    vertical: true,
-    arrows: false,
-    infinite: true,
-    speed: 950,
-    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
-    initialSlide: maxItems - 1
-  });
-  (0, _jquery2.default)('.slideshow-text').slick({
-    swipe: false,
-    vertical: true,
-    arrows: false,
-    infinite: true,
-    speed: 900,
-    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
-  });
-};
 
 /***/ })
 ],[2]);

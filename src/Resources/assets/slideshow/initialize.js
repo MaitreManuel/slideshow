@@ -23,13 +23,13 @@ exports.init = () => {
   slider.classList.add('slideshow-left');
 
   $('.slideshow-left').slick({
-    vertical: true,
-    verticalSwiping: true,
     arrows: false,
-    infinite: true,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
     dots: true,
+    infinite: true,
     speed: 1000,
-    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+    vertical: true,
+    verticalSwiping: true
   }).on('beforeChange', function(event, slick, currentSlide, nextSlide) {
     if (currentSlide > nextSlide && nextSlide === 0 && currentSlide === maxItems - 1) {
       $('.slideshow-right .slider').slick('slickGoTo', -1);
@@ -66,20 +66,22 @@ exports.init = () => {
   });
 
   $('.slideshow-right .slider').slick({
-    swipe: false,
-    vertical: true,
     arrows: false,
-    infinite: true,
-    speed: 950,
     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
-    initialSlide: maxItems - 1
+    infinite: true,
+    initialSlide: maxItems - 1,
+    speed: 950,
+    swipe: false,
+    vertical: true
   });
   $('.slideshow-text').slick({
-    swipe: false,
-    vertical: true,
     arrows: false,
+    adaptiveHeight: true,
+    centerPadding: '500px',
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
     infinite: true,
     speed: 900,
-    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+    swipe: false,
+    vertical: true
   });
 };

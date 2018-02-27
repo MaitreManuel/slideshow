@@ -1,5 +1,5 @@
 // import scripts
-import Slideshow from './slideshow/initialize';
+import * as Slideshow from './slideshow/initialize';
 
 // import styles
 import './main.scss';
