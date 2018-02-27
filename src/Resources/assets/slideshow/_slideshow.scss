@@ -22,6 +22,15 @@
             overflow: hidden;
             position: relative;
             width: 100vw;
+            &:after, &::after {
+                background: rgba($black , .4);
+                content: '\A';
+                height: 100%;
+                left:0;
+                position: absolute;
+                top:0;
+                width: 100%;
+            }
             .text {
                 display: none;
             }
