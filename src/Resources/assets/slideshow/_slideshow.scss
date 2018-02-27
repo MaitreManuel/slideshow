@@ -55,8 +55,6 @@
         height: auto;
         left: auto;
         position: fixed;
-        right: 0;
-        top: 50%;
         width: 40px;
         z-index: 100;
         -webkit-transform: translateY(-50%);
@@ -64,6 +62,14 @@
         -ms-transform: translateY(-50%);
         -o-transform: translateY(-50%);
         transform: translateY(-50%);
+        @media all and (min-width: 769px) {
+            right: 0;
+            top: 50%;
+        }
+        @media all and (max-width: 768px) {
+            right: -10px;
+            top: 25px;
+        }
         li {
             display: block;
             height: auto;

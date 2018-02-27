@@ -76,8 +76,6 @@ exports.init = () => {
   });
   $('.slideshow-text').slick({
     arrows: false,
-    adaptiveHeight: true,
-    centerPadding: '500px',
     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
     infinite: true,
     speed: 900,
