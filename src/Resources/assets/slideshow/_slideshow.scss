@@ -1,0 +1,111 @@
+@import "fix_slick";
+@import "slide_text";
+
+.slideshow {
+    height: 100vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    z-index: 1;
+    .slider {
+        height: 100vw;
+        width: 100vw;
+        z-index: 2;
+        * {
+            outline: none;
+        }
+        .item {
+            border: none;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            width: 100vw;
+            .text {
+                display: none;
+            }
+            img {
+                left: 50%;
+                min-width: 101%;
+                min-height: 101%;
+                position: absolute;
+                top: 50%;
+                -webkit-transform: translate(-50%, -50%);
+                -moz-transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                -o-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
+    .slick-dots {
+        bottom: auto;
+        color: $white;
+        display: block;
+        height: auto;
+        left: auto;
+        position: fixed;
+        right: 0;
+        top: 50%;
+        width: 40px;
+        z-index: 100;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        li {
+            display: block;
+            height: auto;
+            width: 100%;
+            & button {
+                height: 15px;
+                position: relative;
+                text-align: center;
+                width: 20px;
+                &:before, &::before {
+                    background: $white;
+                    border-radius: 0;
+                    color: $white;
+                    content: '';
+                    height: 2px;
+                    left: auto;
+                    opacity: 0.6;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    width: 20px;
+                    -webkit-transform: translateY(-50%);
+                    -moz-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    -o-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    -webkit-transition: all .3s ease-in-out;
+                    -moz-transition: all .3s ease-in-out;
+                    -ms-transition: all .3s ease-in-out;
+                    -o-transition: all .3s ease-in-out;
+                    transition: all .3s ease-in-out;
+                }
+            }
+            &.slick-active {
+                button {
+                    &:before, &::before {
+                        opacity: 1;
+                        width: 40px;
+                    }
+                }
+            }
+        }
+    }
+    &.slideshow-right {
+        left: 0;
+        pointer-events: none;
+        width: 50vw;
+        z-index: 1;
+        .slider {
+            left: 0;
+            position: absolute;
+        }
+    }
+}
