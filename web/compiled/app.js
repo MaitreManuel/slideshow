@@ -56,6 +56,29 @@ module.exports = __webpack_require__(3);
 "use strict";
 
 
+var _initialize = __webpack_require__(4);
+
+var Slideshow = _interopRequireWildcard(_initialize);
+
+__webpack_require__(9);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// DOM Ready
+// import scripts
+window.onload = function () {
+  Slideshow.init();
+};
+
+// import styles
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
@@ -64,17 +87,9 @@ __webpack_require__(7);
 
 __webpack_require__(8);
 
-__webpack_require__(9);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// DOM Ready
-window.onload = function () {
-  init();
-};
-
-// Functions
-var init = function init() {
+exports.init = function () {
   var tracking = void 0,
       rightTracking = void 0,
       dragging = false,
@@ -96,13 +111,13 @@ var init = function init() {
   slider.classList.add('slideshow-left');
 
   (0, _jquery2.default)('.slideshow-left').slick({
-    vertical: true,
-    verticalSwiping: true,
     arrows: false,
-    infinite: true,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
     dots: true,
+    infinite: true,
     speed: 1000,
-    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+    vertical: true,
+    verticalSwiping: true
   }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
     if (currentSlide > nextSlide && nextSlide === 0 && currentSlide === maxItems - 1) {
       (0, _jquery2.default)('.slideshow-right .slider').slick('slickGoTo', -1);
@@ -139,26 +154,27 @@ var init = function init() {
   });
 
   (0, _jquery2.default)('.slideshow-right .slider').slick({
-    swipe: false,
-    vertical: true,
     arrows: false,
-    infinite: true,
-    speed: 950,
     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
-    initialSlide: maxItems - 1
+    infinite: true,
+    initialSlide: maxItems - 1,
+    speed: 950,
+    swipe: false,
+    vertical: true
   });
   (0, _jquery2.default)('.slideshow-text').slick({
-    swipe: false,
-    vertical: true,
     arrows: false,
+    adaptiveHeight: true,
+    centerPadding: '500px',
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
     infinite: true,
     speed: 900,
-    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)'
+    swipe: false,
+    vertical: true
   });
 };
 
 /***/ }),
-/* 4 */,
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
