@@ -1,5 +1,6 @@
 .DS_Store
 ._*
+monitor/*
 node_modules
 vendor
 .idea
