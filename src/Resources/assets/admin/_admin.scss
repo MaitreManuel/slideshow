@@ -8,13 +8,27 @@
 		position: absolute;
 		right: 0;
 		bottom: 0;
+		cursor: pointer;
 	}
 	#admin-settings {
 		position: fixed;
 		display: block;
 		bottom: 25px;
 		right: 25px;
+		z-index: 998;
+	}
+	#admin-panel {
+		background-color: #fff;
+		min-height: 100vh;
+		position: fixed;
+		right: 0;
+		margin-right: -90%;
 		z-index: 999;
+		top: 0;
+		padding: 25px;
+		&.active {
+			right: 0;
+		}
 	}
 }
 
