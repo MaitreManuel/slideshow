@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+// const WebpackMonitor = require('webpack-monitor');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeModules = path.resolve(__dirname, 'node_modules');
 
@@ -10,6 +11,7 @@ const config = {
   entry: {
     app: [
       './src/Resources/assets/app.js',
+      './src/Resources/react/application.js',
     ]
   },
   output: {
@@ -132,13 +134,14 @@ const config = {
   },
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'source-map',
-  // resolve: {
-  //   alias: {
-  // https://github.com/vuejs-templates/webpack/issues/215
-  // vue: 'vue/dist/vue.common.js'
-  // }
-  // },
+  resolve: {
+    alias: {
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
+  },
   plugins: [
+    // new WebpackMonitor({ launch: true }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
       filename: 'common.js'
