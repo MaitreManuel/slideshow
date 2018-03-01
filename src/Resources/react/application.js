@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import SlideGenerator from './Stateful/SlideGenerator';
+
 const react_entry_point = document.getElementById('react-entry-point');
 
 class Root extends Component {
@@ -13,7 +15,7 @@ class Root extends Component {
   }
 
   render() {
-    return (null);
+    return (<SlideGenerator/>);
   }
 } export default Root;
 
