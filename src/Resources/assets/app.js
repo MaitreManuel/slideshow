@@ -3,7 +3,7 @@ import * as Slideshow from './slideshow/initialize';
 import Admin from './admin/admin';
 
 // import styles
-import './main.scss';
+import './main.scss';  
 
 // DOM Ready
 window.onload = () => {

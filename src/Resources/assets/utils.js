@@ -8,4 +8,8 @@ export default class Utils {
     }
   }
 
+  static uniqueID () { // Generate unique key
+    return '_' + Math.random().toString(36).substr(2, 9)
+  }
+
 }
