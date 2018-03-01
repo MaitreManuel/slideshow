@@ -231,14 +231,27 @@
   border-radius: 100%;
   position: absolute;
   right: 0;
-  bottom: 0; }
+  bottom: 0;
+  cursor: pointer; }
 
 #admin #admin-settings {
   position: fixed;
   display: block;
   bottom: 25px;
   right: 25px;
-  z-index: 999; }
+  z-index: 998; }
+
+#admin #admin-panel {
+  background-color: #fff;
+  min-height: 100vh;
+  position: fixed;
+  right: 0;
+  margin-right: -90%;
+  z-index: 999;
+  top: 0;
+  padding: 25px; }
+  #admin #admin-panel.active {
+    right: 0; }
 
 /* Animation */
 @keyframes zoomIn {
