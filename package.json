@@ -13,7 +13,7 @@
     "build:watch": "webpack --watch",
     "build:dev": "webpack",
     "build": "NODE_ENV=production webpack -p",
-    "deploy": "npm run build && git add -A && git commit -m ':rocket: deploy' && git push && git subtree push --prefix web origin gh-pages",
+    "deploy": "npm run build && git add -A && git commit -nm ':rocket: deploy' && git push && git subtree push --prefix web origin gh-pages",
     "start": "webpack-dev-server"
   },
   "dependencies": {
