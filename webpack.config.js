@@ -134,12 +134,6 @@ const config = {
   },
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'source-map',
-  resolve: {
-    alias: {
-      'react': 'preact-compat',
-      'react-dom': 'preact-compat'
-    }
-  },
   plugins: [
     // new WebpackMonitor({ launch: true }),
     new webpack.optimize.CommonsChunkPlugin({

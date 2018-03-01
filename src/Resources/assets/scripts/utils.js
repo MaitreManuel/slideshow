@@ -1,5 +1,4 @@
 export default class Utils {
-
   static toggle (el, className) {
     if (el.classList.contains(className)) {
       el.classList.remove(className);
@@ -7,5 +6,4 @@ export default class Utils {
       el.classList.add(className);
     }
   }
-
 }

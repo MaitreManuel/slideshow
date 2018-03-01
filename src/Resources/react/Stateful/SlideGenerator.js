@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Image from '../Stateless/Image';
 import Text from '../Stateless/Text';
 
+import SLIDES_JSON from '../../datas/data';
+
 class SlideGenerator extends Component {
   constructor(props) {
     super(props);
@@ -20,40 +22,62 @@ class SlideGenerator extends Component {
 
   componentDidMount() {
     const me = this;
-    let slides = me.fetchSlides(),
-      images = me.constructSlideImage(slides.images),
-      texts = me.constructSlideText(slides.texts);
+    let slides = me.fetchSlides();
 
-    me.setState({
-      images:   images,
-      slides:   slides,
-      texts:    texts,
-    });
+    me.constructSlideImage(slides.images);
+    me.constructSlideText(slides.texts);
+
+    me.setState({ slides: slides });
   }
 
-  constructSlideImage() {
-    let images = [];
+  constructSlideImage(images) {
+    const me = this;
+    let images_dyn = [];
 
-    return images;
+    for(let i = 0; i < images.length; i++) {
+      images_dyn.push( <Image src={ images[i] } /> );
+    }
+
+    me.setState({ images: images_dyn });
   }
 
-  constructSlideText() {
-    let texts = [];
+  constructSlideText(texts) {
+    const me = this;
+    let texts_dyn = [];
 
-    return texts;
+    for(let i = 0; i < texts.length; i++) {
+      texts_dyn.push( <Text title={ texts[i] } /> );
+    }
+
+    me.setState({ texts: texts_dyn });
   }
 
   fetchSlides() {
-    let slides = [];
+    let slides = {
+      images: [],
+      texts: []
+    };
+
+    // waiting for dynamic fixtures
+    for(let i = 0; i < SLIDES_JSON.length; i++) {
+      let slide = SLIDES_JSON[i];
+
+      slides.images.push(slide.src);
+      slides.texts.push(slide.title);
+    }
 
     return slides;
   }
 
   render() {
+    const me = this,
+      images = me.state.images,
+      texts = me.state.texts;
+
     return (
       <div>
-        <Image/>
-        <Text/>
+        { images }
+        { texts }
       </div>
     );
   }
