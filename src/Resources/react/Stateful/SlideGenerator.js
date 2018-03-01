@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Image from '../Stateless/Image';
 import Text from '../Stateless/Text';
 
-import SLIDES_JSON from '../../datas/data';
+// import SLIDES_JSON from '../../datas/data';
 
 class SlideGenerator extends Component {
   constructor(props) {
@@ -52,22 +52,22 @@ class SlideGenerator extends Component {
     me.setState({ texts: texts_dyn });
   }
 
-  fetchSlides() {
-    let slides = {
-      images: [],
-      texts: []
-    };
-
-    // waiting for dynamic fixtures
-    for(let i = 0; i < SLIDES_JSON.length; i++) {
-      let slide = SLIDES_JSON[i];
-
-      slides.images.push(slide.src);
-      slides.texts.push(slide.title);
-    }
-
-    return slides;
-  }
+  // fetchSlides() {
+  //   let slides = {
+  //     images: [],
+  //     texts: []
+  //   };
+  //
+  //   // waiting for dynamic fixtures
+  //   for(let i = 0; i < SLIDES_JSON.length; i++) {
+  //     let slide = SLIDES_JSON[i];
+  //
+  //     slides.images.push(slide.src);
+  //     slides.texts.push(slide.title);
+  //   }
+  //
+  //   return slides;
+  // }
 
   render() {
     const me = this,
