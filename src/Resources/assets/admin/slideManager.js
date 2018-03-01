@@ -16,6 +16,7 @@ export default class slideManager {
     firebase.initializeApp(this.config);
   }
 
+  // Peut etre rajouter .val() eventuellement
   getSlides () {
     return firebase.database().ref('/slides');
   }
