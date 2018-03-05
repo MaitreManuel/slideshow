@@ -18,17 +18,25 @@ export default class slideManager {
     firebase.initializeApp(slideManager.getConfig());
   }
 
+  login (email, password) {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
+
+  logout () {
+    return firebase.auth().signOut();
+  }
+
   getSlides () {
     return firebase.database().ref('/slides').once('value');
   }
 
   addSlide (title, description, link, src) {
-    firebase.database().ref('slides/' + Utils.uniqueID()).set({
+    return firebase.database().ref('slides/' + Utils.uniqueID()).set({
       title: title,
       description: description,
       link: link,
       src: src
-    }.then(console.log('slide is added')));
+    });
   }
 
 }

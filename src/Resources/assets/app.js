@@ -12,9 +12,12 @@ window.onload = () => {
   Admin.init();
 
   let sManager = new slideManager();
-  const slides = sManager.getSlides();
-  slides.then((e) => {
+  const getSlides = sManager.getSlides();
+  getSlides.then((e) => {
     console.log(e.val());
   });
 
+  sManager.login('herve@slideshow.fr', 'slideshow')
+  .then(sManager.addSlide('Titre de la slide ajoutee', 'Description de la slide', 'url href', 'src'))
+  .then(sManager.logout());
 };
