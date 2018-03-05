@@ -134,6 +134,12 @@ const config = {
   },
   // devtool: 'cheap-module-eval-source-map',
   devtool: 'source-map',
+  resolve: {
+    alias: {
+      'react': 'inferno-compat',
+      'react-dom': 'inferno-compat'
+    }
+  },
   plugins: [
     // new WebpackMonitor({ launch: true }),
     new webpack.optimize.CommonsChunkPlugin({
