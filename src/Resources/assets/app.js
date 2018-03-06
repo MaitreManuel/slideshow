@@ -1,6 +1,6 @@
 // import scripts
 import Admin from './admin/admin';
-import slideManager from './admin/slideManager';
+// import slideManager from './admin/slideManager';
 
 // import styles
 import './main.scss';
@@ -8,8 +8,6 @@ import './main.scss';
 // DOM Ready
 window.onload = () => {
   Admin.init();
-
-  let sManager = new slideManager();
 
   /*
   * pour tester le login / set / logout
