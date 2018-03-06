@@ -3,6 +3,7 @@ import Utils from '../scripts/utils';
 
 export default class slideManager {
 
+  static _instance;
   static getConfig () {
     return {
       apiKey: 'AIzaSyAF2w55IwwCMTtSyyYzxnf0gR9rhTeR4uI',
@@ -18,17 +19,32 @@ export default class slideManager {
     firebase.initializeApp(slideManager.getConfig());
   }
 
+  static getManager () {
+    if(!this._instance) {
+      this._instance = new slideManager();
+    }
+    return this._instance;
+  }
+
+  login (email, password) {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
+
+  logout () {
+    return firebase.auth().signOut();
+  }
+
   getSlides () {
     return firebase.database().ref('/slides').once('value');
   }
 
-  addSlide (title, description, link, src) {
-    firebase.database().ref('slides/' + Utils.uniqueID()).set({
+  addSlide (title, description, link, image) {
+    return firebase.database().ref('slides/' + Utils.uniqueID()).set({
       title: title,
       description: description,
       link: link,
-      src: src
-    }.then(console.log('slide is added')));
+      image: image
+    });
   }
 
 }

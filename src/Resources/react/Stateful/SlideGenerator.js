@@ -91,7 +91,7 @@ class SlideGenerator extends Component {
     const me = this;
     let slides_extract = [];
 
-    let sManager = new slideManager();
+    let sManager = slideManager.getManager();
     const slides_firebase = sManager.getSlides();
 
     slides_firebase.then((e) => {
