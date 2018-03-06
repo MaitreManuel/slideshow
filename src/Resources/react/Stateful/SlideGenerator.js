@@ -1,33 +1,50 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 import Image from '../Stateless/Image';
 import Text from '../Stateless/Text';
 
-import SLIDES_JSON from '../../datas/data';
+import * as Slideshow from '../../assets/slideshow/initialize';
+import slideManager from '../../assets/admin/slideManager';
+
+const loader = document.querySelector('#loader');
 
 class SlideGenerator extends Component {
   constructor(props) {
     super(props);
 
+    this.constructSlides = this.constructSlides.bind(this);
     this.constructSlideImage = this.constructSlideImage.bind(this);
     this.constructSlideText = this.constructSlideText.bind(this);
     this.fetchSlides = this.fetchSlides.bind(this);
 
     this.state = {
-      images:     [],
-      slides:     [],
-      texts:      [],
+      images            : [],
+      load              : false,
+      slides            : [],
+      slides_extract    : [],
+      texts             : [],
     };
   }
 
   componentDidMount() {
     const me = this;
-    let slides = me.fetchSlides();
 
-    me.constructSlideImage(slides.images);
-    me.constructSlideText(slides.texts);
+    me.fetchSlides();
+  }
 
-    me.setState({ slides: slides });
+  componentDidUpdate() {
+    const me = this;
+
+    if(me.state.load === false) {
+      let slides = me.constructSlides();
+
+      me.constructSlideText(slides.texts);
+      me.constructSlideImage(slides.images);
+      me.setState({ load: true });
+    } else {
+      Slideshow.init();
+    }
   }
 
   constructSlideImage(images) {
@@ -52,24 +69,52 @@ class SlideGenerator extends Component {
     me.setState({ texts: texts_dyn });
   }
 
-  fetchSlides() {
+  constructSlides() {
+    const me = this;
     let slides = {
-      images: [],
-      texts: []
-    };
+        images: [],
+        texts: []
+      },
+      slides_extract = me.state.slides_extract;
 
-    // waiting for dynamic fixtures
-    for(let i = 0; i < SLIDES_JSON.length; i++) {
-      let slide = SLIDES_JSON[i];
+    for(let i = 0; i < slides_extract.length; i++) {
+      let slide = slides_extract[i];
 
-      slides.images.push(slide.src);
+      slides.images.push(slide.image);
       slides.texts.push(slide.title);
     }
 
     return slides;
   }
 
-  render() {
+  fetchSlides() {
+    const me = this;
+    let slides_extract = [];
+
+    let sManager = new slideManager();
+    const slides_firebase = sManager.getSlides();
+
+    slides_firebase.then((e) => {
+      let slide = e.val();
+
+      Object.keys(slide).forEach(key => {
+        slides_extract.push(slide[key]);
+      });
+
+      me.setState({ slides_extract: slides_extract });
+    });
+
+  }
+
+  loading() {
+    let template =
+      <div className="Loader"></div>
+    ;
+
+    return ReactDOM.createPortal(template, loader);
+  }
+
+  render_dynamic() {
     const me = this,
       images = me.state.images,
       texts = me.state.texts;
@@ -80,5 +125,13 @@ class SlideGenerator extends Component {
         { texts }
       </div>
     );
+  }
+
+  render() {
+    if(this.state.load === true) {
+      return this.render_dynamic();
+    } else {
+      return this.loading();
+    }
   }
 } export default SlideGenerator;
