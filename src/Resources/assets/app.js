@@ -18,6 +18,6 @@ window.onload = () => {
   });
 
   sManager.login('herve@slideshow.fr', 'slideshow')
-  .then(sManager.addSlide('Titre de la slide ajoutee', 'Description de la slide', 'url href', 'src'))
-  .then(sManager.logout());
+    .then(sManager.addSlide('Titre de la slide ajoutee', 'Description de la slide', 'url href', 'src'))
+    .then(sManager.logout());
 };
