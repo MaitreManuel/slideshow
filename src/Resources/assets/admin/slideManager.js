@@ -4,7 +4,6 @@ import Utils from '../scripts/utils';
 export default class slideManager {
 
   static _instance;
-  static date;
   static getConfig () {
     return {
       apiKey: 'AIzaSyAF2w55IwwCMTtSyyYzxnf0gR9rhTeR4uI',
@@ -18,7 +17,6 @@ export default class slideManager {
 
   constructor () {
     firebase.initializeApp(slideManager.getConfig());
-    this.date = new Date();
   }
 
   static getManager () {
