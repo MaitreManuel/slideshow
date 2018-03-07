@@ -1,0 +1,31 @@
+#admin   {
+    #admin-panel {
+        background-color: $light_grey;
+        margin-right: -100%;
+        height: 100vh;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 998;
+        -webkit-transition: margin-right .35s linear;
+        transition: margin-right .35s linear;
+        @media all and (min-width: 769px) {
+            width: 33vw;
+        }
+        @media all and (min-width: 577px) and (max-width: 768px) {
+            width: 50vw;
+        }
+        @media all and (max-width: 576px) {
+            width: 100vw;
+        }
+        &.active {
+            margin-right: 0;
+        }
+        .wrapper-panel {
+            padding: 15px;
+            label {
+                margin-bottom: 15px;
+            }
+        }
+    }
+}

@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="compiled/app.css">
     </head>
     <body>
+        <div id="slideshow-title"></div>
         <div id="loader"></div>
         <div class="split-slideshow">
             <div class="slideshow">
@@ -20,10 +21,33 @@
         </div>
         <div id="admin">
             <div id="admin-settings">
-                <img src="public/img/settings.svg" alt="settings" class="svg-icon">
+                <a href="javascript:void(0);" class="btn btn-valid">
+                    <svg class="edit" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                    <svg class="valid" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                    </svg>
+                </a>
+                <a href="javascript:void(0);" class="btn btn-cancel">
+                    <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                </a>
             </div>
             <div id="admin-panel">
-                testsetsetsetsetsetsetsetset
+                <div class="wrapper-panel">
+                    <h2>Slideshow</h2>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="edit-slideshow-title">Titre</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="DC Comics" aria-label="Titre slideshow" aria-describedby="edit-slideshow-title">
+                    </div>
+                </div>
             </div>
         </div>
         <div id="react-entry-point"></div>

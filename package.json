@@ -17,6 +17,7 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "firebase": "^4.10.1",
     "inferno": "^4.0.8",
     "inferno-clone-vnode": "^4.0.8",
