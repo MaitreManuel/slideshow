@@ -40,12 +40,66 @@
             </div>
             <div id="admin-panel">
                 <div class="wrapper-panel">
-                    <h2>Slideshow</h2>
+                    <h2>Slide</h2>
+
                     <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="edit-slideshow-title">Titre</span>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Titre</span>
+                            </div>
+                            <input type="text" id="admin-title" class="form-control" placeholder="Titre du slide" aria-label="Titre du slide" aria-describedby="slide-title">
                         </div>
-                        <input type="text" class="form-control" placeholder="DC Comics" aria-label="Titre slideshow" aria-describedby="edit-slideshow-title">
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Description</span>
+                            </div>
+                            <input type="text" id="admin-desc" class="form-control" placeholder="Description slide" aria-label="Description slide" aria-describedby="slideshow-description">
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" class="slide-desc-pos">Positionnement de la description</span>
+                            </div>
+
+                            <!-- Remplacer par des icones -->
+                            <div class="form-control">
+                                <label class="custom-control custom-radio">
+                                    <input id="tl" name="radio-tl" type="radio" class="custom-control-input">
+                                    <span class="custom-control-description">Top-left</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input id="tr" name="radio-tr" type="radio" class="custom-control-input">
+                                    <span class="custom-control-description">Top-right</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input id="br" name="radio-br" type="radio" class="custom-control-input">
+                                    <span class="custom-control-description">Bottom-right</span>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input id="bl" name="radio-bl" type="radio" class="custom-control-input">
+                                    <span class="custom-control-description">Bottom-left</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Lien du bouton</span>
+                            </div>
+                            <input type="text" id="admin-link" class="form-control" placeholder="Lien" aria-label="Lien slide" aria-describedby="edit-slide-link">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" class="admin-link">Image</span>
+                            </div>
+                            <div class="form-control">
+                                <label class="custom-file">
+                                    <input type="file" id="file" class="custom-file-input">
+                                    <span class="custom-file-control"></span>
+                                </label>
+                                <div id="admin-img"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
