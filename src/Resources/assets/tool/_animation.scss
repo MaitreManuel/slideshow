@@ -1,3 +1,8 @@
+.fadein {
+    cursor: pointer;
+    -webkit-transition: background-color .2s ease-in, color .2s ease-in, border .2s ease-in;
+    transition: background-color .2s ease-in, color .2s ease-in, border .2s ease-in;
+}
 @keyframes zoomIn {
     from {
         opacity: 0;
