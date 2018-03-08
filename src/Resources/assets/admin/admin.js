@@ -20,6 +20,10 @@ exports.init = () => {
 
         const slideToUpdate = getInfo('admin');
         sManager.updateSlide(slideToUpdate.slideId, slideToUpdate.titleHTML, slideToUpdate.descHTML, slideToUpdate.linkHTML, slideToUpdate.imgSrc);
+        setTimeout(() => {
+          panel.classList.remove('active');
+          settings.classList.remove('active');
+        }, 3000);
       } else {
         alert('Veuillez remplir tous les champs');
       }
@@ -58,8 +62,8 @@ exports.init = () => {
         slideId: document.querySelector('#slides-image .slick-current .item img').getAttribute('data-id'),
         imgHTML: document.querySelector('#slides-image .slick-current .item img'),
         titleHTML:document.querySelector('#slides-text .slick-current .item').innerHTML,
-        // descHTML: document.querySelector('#slides-desc').innerHTML,
-        // linkHTML: document.querySelector('#slides-link').innerHTML
+        descHTML: document.querySelector('#slides-description').innerHTML,
+        linkHTML: document.querySelector('#slides-link').innerHTML
       };
     } else if (which === 'admin') {
       return {
