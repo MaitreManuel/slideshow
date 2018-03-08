@@ -29,6 +29,15 @@
         }
         .input-group {
             margin-bottom: 15px;
+            input[type=file] {
+                background-color: #f1f1f1;
+                border: 1px solid #cccccc;
+                padding: 11px;
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+                text-align: center !important;
+            }
             #admin-img {
                 img {
                     width: 100%;
