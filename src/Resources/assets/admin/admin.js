@@ -56,9 +56,6 @@ exports.init = () => {
   * Ajout d'une slide
   * */
   document.querySelector('#add').addEventListener('click', () => {
-    /*
-    * ajouter class sur le bouton valider pour changer le update en add si la classe est active
-    * */
     emptyAdminField();
     valid.classList.add('toAdd');
   });
@@ -82,8 +79,8 @@ exports.init = () => {
 
     adminImg.appendChild(slideObject.imgHTML.cloneNode(true));
     adminTitle.value = slideObject.titleHTML;
-    adminDesc.value= 'test';
-    adminLink.value = 'test';
+    adminDesc.value= slideObject.descHTML;
+    adminLink.value = slideObject.linkHTML;
   };
 
   /*
@@ -95,8 +92,8 @@ exports.init = () => {
         slideId: document.querySelector('#slides-image .slick-current .item img').getAttribute('data-id'),
         imgHTML: document.querySelector('#slides-image .slick-current .item img'),
         titleHTML:document.querySelector('#slides-text .slick-current .item').innerHTML,
-        descHTML: document.querySelector('#slides-description').innerHTML,
-        // linkHTML: document.querySelector('#slides-link').innerHTML
+        descHTML: document.querySelector('#slides-description .slick-current .item').innerHTML,
+        linkHTML: document.querySelector('#slides-link .slick-current .item').innerHTML
       };
     } else if (which === 'admin') {
       return {
