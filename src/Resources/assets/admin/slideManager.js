@@ -52,7 +52,7 @@ export default class slideManager {
   }
 
   addSlide (title, description, link, image) {
-    return firebase.database().ref('slides/' + Utils.uniqueID()).set({
+    return firebase.database().ref('/slides/' + Utils.uniqueID()).set({
       title: title,
       description: description,
       link: link,

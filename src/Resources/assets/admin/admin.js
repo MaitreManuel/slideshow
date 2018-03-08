@@ -17,9 +17,20 @@ exports.init = () => {
       if(formIsNotEmpty()) {
         const slideForFile = getInfo('admin');
         Utils.loadImageFileAsURL(slideForFile.imgFile);
-
-        const slideToUpdate = getInfo('admin');
-        sManager.updateSlide(slideToUpdate.slideId, slideToUpdate.titleHTML, slideToUpdate.descHTML, slideToUpdate.linkHTML, slideToUpdate.imgSrc);
+        if(valid.classList.contains('toAdd')) {
+          /*
+          * Ajout de la slide sur firebase
+          * */
+          const slideToAdd = getInfo('admin');
+          sManager.addSlide(slideToAdd.titleHTML, slideToAdd.descHTML, slideToAdd.linkHTML, slideToAdd.imgSrc);
+          valid.classList.remove('toAdd');
+        } else {
+          const slideToUpdate = getInfo('admin');
+          /*
+          * Update de la slide
+          * */
+          sManager.updateSlide(slideToUpdate.slideId, slideToUpdate.titleHTML, slideToUpdate.descHTML, slideToUpdate.linkHTML, slideToUpdate.imgSrc);
+        }
         setTimeout(() => {
           panel.classList.remove('active');
           settings.classList.remove('active');
@@ -37,8 +48,20 @@ exports.init = () => {
   cancel.addEventListener('click', () => {
     panel.classList.remove('active');
     settings.classList.remove('active');
+    valid.classList.remove('toAdd');
   });
 
+
+  /*
+  * Ajout d'une slide
+  * */
+  document.querySelector('#add').addEventListener('click', () => {
+    /*
+    * ajouter class sur le bouton valider pour changer le update en add si la classe est active
+    * */
+    emptyAdminField();
+    valid.classList.add('toAdd');
+  });
 
   /*
   * Permet de cloner une image (pour la mettre dans l'admin)
@@ -63,13 +86,13 @@ exports.init = () => {
         imgHTML: document.querySelector('#slides-image .slick-current .item img'),
         titleHTML:document.querySelector('#slides-text .slick-current .item').innerHTML,
         descHTML: document.querySelector('#slides-description').innerHTML,
-        linkHTML: document.querySelector('#slides-link').innerHTML
+        // linkHTML: document.querySelector('#slides-link').innerHTML
       };
     } else if (which === 'admin') {
       return {
         slideId: document.querySelector('#slides-image .slick-current .item img').getAttribute('data-id'),
         imgFile: document.querySelector('input[type=file]').files[0],
-        imgSrc: document.querySelector('#admin-img img').src,
+        imgSrc: document.querySelector('#admin-img img') !== null ? document.querySelector('#admin-img img').src : undefined,
         titleHTML: document.querySelector('#admin-title').value,
         descHTML: document.querySelector('#admin-desc').value,
         linkHTML: document.querySelector('#admin-link').value
@@ -81,12 +104,13 @@ exports.init = () => {
   * Vide les champs de l'admin
   * */
   const emptyAdminField = () => {
-    adminTitle.innerHTML = '';
+    adminTitle.value = '';
     while (adminImg.firstChild) {
       adminImg.removeChild(adminImg.firstChild);
     }
-    adminDesc.innerHTML = '';
-    adminLink.innerHTML = '';
+    adminImg.appendChild(document.createElement('img'));
+    adminDesc.value = '';
+    adminLink.value = '';
   };
 
   /*
