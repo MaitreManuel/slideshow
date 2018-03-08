@@ -42,6 +42,15 @@ export default class slideManager {
     return firebase.database().ref('/slide_title').once('value');
   }
 
+  updateSlide (id, title, description, link, image) {
+    firebase.database().ref('/slides').child(id).update({
+      title: title,
+      description: description,
+      link: link,
+      image: image
+    });
+  }
+
   addSlide (title, description, link, image) {
     return firebase.database().ref('slides/' + Utils.uniqueID()).set({
       title: title,
