@@ -10,9 +10,12 @@ exports.init = () => {
     adminTitle = document.querySelector('#admin-title'),
     adminDesc = document.querySelector('#admin-desc'),
     adminLink = document.querySelector('#admin-link'),
+    block = document.querySelector('#block'),
     sManager = slideManager.getManager();
 
   valid.addEventListener('click', () => {
+    block.classList.add('block');
+
     if(panel.classList.contains('active')) {
       if(formIsNotEmpty()) {
         const slideForFile = getInfo('admin');
@@ -31,6 +34,7 @@ exports.init = () => {
   });
 
   cancel.addEventListener('click', () => {
+    block.classList.remove('block');
     panel.classList.remove('active');
     settings.classList.remove('active');
   });

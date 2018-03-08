@@ -26,6 +26,14 @@ body, html {
     font-family: 'Roboto', sans-serif;
     overflow: hidden;
 }
+.block {
+    height: 100vh;
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100vw;
+    z-index: 997;
+}
 .btn-ovale {
     border-radius: 20px;
     font-size: 1rem;
