@@ -1,0 +1,70 @@
+#admin   {
+    #admin-panel {
+        background-color: $light_grey;
+        margin-right: -100%;
+        height: 100vh;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 998;
+        -webkit-transition: margin-right .35s linear;
+        transition: margin-right .35s linear;
+        @media all and (min-width: 769px) {
+            width: 33vw;
+        }
+        @media all and (min-width: 577px) and (max-width: 768px) {
+            width: 50vw;
+        }
+        @media all and (max-width: 576px) {
+            width: 100vw;
+        }
+        &.active {
+            margin-right: 0;
+        }
+        .wrapper-panel {
+            padding: 15px;
+            label {
+                margin-bottom: 15px;
+            }
+        }
+        .input-group {
+            margin-bottom: 15px;
+            #admin-img {
+                img {
+                    width: 100%;
+                }
+            }
+            svg {
+                vertical-align: sub;
+            }
+            #tl + svg {
+                -webkit-transform: rotate(-90deg);
+                -moz-transform: rotate(-90deg);
+                -ms-transform: rotate(-90deg);
+                -o-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+            }
+            #tr + svg {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            #br + svg {
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+            #bl + svg {
+                -webkit-transform: rotate(180deg);
+                -moz-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+        }
+    }
+}

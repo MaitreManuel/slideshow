@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import Description from '../Stateless/Description';
 import Image from '../Stateless/Image';
 import Text from '../Stateless/Text';
 
@@ -8,21 +9,25 @@ import * as Slideshow from '../../assets/slideshow/initialize';
 import slideManager from '../../assets/admin/slideManager';
 
 const loader = document.querySelector('#loader');
+const sManager = slideManager.getManager();
 
 class SlideGenerator extends Component {
   constructor(props) {
     super(props);
 
-    this.constructSlides = this.constructSlides.bind(this);
+    this.constructSlideDescription = this.constructSlideDescription.bind(this);
     this.constructSlideImage = this.constructSlideImage.bind(this);
     this.constructSlideText = this.constructSlideText.bind(this);
+    this.extractSlides = this.extractSlides.bind(this);
     this.fetchSlides = this.fetchSlides.bind(this);
 
     this.state = {
+      descriptions      : [],
       images            : [],
-      load              : false,
+      load              : {
+        slides   : false
+      },
       slides            : [],
-      slides_extract    : [],
       texts             : [],
     };
   }
@@ -36,23 +41,37 @@ class SlideGenerator extends Component {
   componentDidUpdate() {
     const me = this;
 
-    if(me.state.load === false) {
-      let slides = me.constructSlides();
+    if(me.state.load.slides === false) {
+      let slides = me.extractSlides();
 
       me.constructSlideText(slides.texts);
-      me.constructSlideImage(slides.images);
-      me.setState({ load: true });
+      me.constructSlideDescription(slides.descriptions);
+      me.constructSlideImage(slides.images, slides.id);
+      if(me.state.load.slides === false) {
+        me.setState({ load: { slides: true } });
+      }
     } else {
       Slideshow.init();
     }
   }
 
-  constructSlideImage(images) {
+  constructSlideDescription(descriptions) {
+    const me = this;
+    let descriptions_dyn = [];
+
+    for(let i = 0; i < descriptions.length; i++) {
+      descriptions_dyn.push( <Description key={ 'description slide '+ i } description={ descriptions[i] } /> );
+    }
+
+    me.setState({ descriptions: descriptions_dyn });
+  }
+
+  constructSlideImage(images, id) {
     const me = this;
     let images_dyn = [];
 
     for(let i = 0; i < images.length; i++) {
-      images_dyn.push( <Image key={ 'image slide '+ i } src={ images[i] } /> );
+      images_dyn.push( <Image key={ 'image slide '+ i } src={ images[i] } id={ id[i] } /> );
     }
 
     me.setState({ images: images_dyn });
@@ -69,17 +88,21 @@ class SlideGenerator extends Component {
     me.setState({ texts: texts_dyn });
   }
 
-  constructSlides() {
+  extractSlides() {
     const me = this;
     let slides = {
+        descriptions: [],
+        id: [],
         images: [],
         texts: []
       },
-      slides_extract = me.state.slides_extract;
+      slides_extract = me.state.slides;
 
     for(let i = 0; i < slides_extract.length; i++) {
       let slide = slides_extract[i];
 
+      slides.descriptions.push(slide.description);
+      slides.id.push(slide.id);
       slides.images.push(slide.image);
       slides.texts.push(slide.title);
     }
@@ -88,22 +111,21 @@ class SlideGenerator extends Component {
   }
 
   fetchSlides() {
-    const me = this;
+    const me = this,
+      slides_firebase = sManager.getSlides();
     let slides_extract = [];
 
-    let sManager = slideManager.getManager();
-    const slides_firebase = sManager.getSlides();
 
-    slides_firebase.then((e) => {
+    slides_firebase.then(e => {
       let slide = e.val();
 
       Object.keys(slide).forEach(key => {
+        slide[key]['id'] = key;
         slides_extract.push(slide[key]);
       });
 
-      me.setState({ slides_extract: slides_extract });
+      me.setState({ slides: slides_extract });
     });
-
   }
 
   loading() {
@@ -117,10 +139,12 @@ class SlideGenerator extends Component {
   render_dynamic() {
     const me = this,
       images = me.state.images,
-      texts = me.state.texts;
+      texts = me.state.texts,
+      descriptions = me.state.descriptions;
 
     return (
       <div>
+        { descriptions }
         { images }
         { texts }
       </div>
@@ -128,7 +152,7 @@ class SlideGenerator extends Component {
   }
 
   render() {
-    if(this.state.load === true) {
+    if(this.state.load.slides === true) {
       return this.render_dynamic();
     } else {
       return this.loading();

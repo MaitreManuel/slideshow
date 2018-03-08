@@ -38,6 +38,10 @@ export default class slideManager {
     return firebase.database().ref('/slides').once('value');
   }
 
+  getSlideTitle () {
+    return firebase.database().ref('/slide_title').once('value');
+  }
+
   addSlide (title, description, link, image) {
     return firebase.database().ref('slides/' + Utils.uniqueID()).set({
       title: title,

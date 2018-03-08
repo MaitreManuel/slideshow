@@ -20,5 +20,6 @@ class Root extends Component {
 } export default Root;
 
 if(react_entry_point) {
+  require('inferno-devtools');
   ReactDOM.render(<Root/>, react_entry_point);
 }
