@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Description from '../Stateless/Description';
 import Image from '../Stateless/Image';
+import Link from '../Stateless/Link';
 import Text from '../Stateless/Text';
 
 import * as Slideshow from '../../assets/slideshow/initialize';
@@ -17,18 +18,20 @@ class SlideGenerator extends Component {
 
     this.constructSlideDescription = this.constructSlideDescription.bind(this);
     this.constructSlideImage = this.constructSlideImage.bind(this);
-    this.constructSlideText = this.constructSlideText.bind(this);
+    this.constructSlideLink = this.constructSlideLink.bind(this);
+    this.constructSlideTitle = this.constructSlideTitle.bind(this);
     this.extractSlides = this.extractSlides.bind(this);
     this.fetchSlides = this.fetchSlides.bind(this);
 
     this.state = {
       descriptions      : [],
       images            : [],
+      links             : [],
       load              : {
-        slides   : false
+        slides: false
       },
       slides            : [],
-      texts             : [],
+      titles             : [],
     };
   }
 
@@ -44,7 +47,8 @@ class SlideGenerator extends Component {
     if(me.state.load.slides === false) {
       let slides = me.extractSlides();
 
-      me.constructSlideText(slides.texts);
+      me.constructSlideTitle(slides.titles);
+      me.constructSlideLink(slides.links, slides.titles);
       me.constructSlideDescription(slides.descriptions);
       me.constructSlideImage(slides.images, slides.id);
       if(me.state.load.slides === false) {
@@ -77,15 +81,26 @@ class SlideGenerator extends Component {
     me.setState({ images: images_dyn });
   }
 
-  constructSlideText(texts) {
+  constructSlideLink(links, titles) {
     const me = this;
-    let texts_dyn = [];
+    let links_dyn = [];
 
-    for(let i = 0; i < texts.length; i++) {
-      texts_dyn.push( <Text key={ 'text '+ texts[i] } title={ texts[i] } /> );
+    for(let i = 0; i < links.length; i++) {
+      links_dyn.push( <Link key={ 'link slide '+ i } link={ links[i] } title={ titles[i] } /> );
     }
 
-    me.setState({ texts: texts_dyn });
+    me.setState({ links: links_dyn });
+  }
+
+  constructSlideTitle(titles) {
+    const me = this;
+    let titles_dyn = [];
+
+    for(let i = 0; i < titles.length; i++) {
+      titles_dyn.push( <Text key={ 'title '+ titles[i] } title={ titles[i] } /> );
+    }
+
+    me.setState({ titles: titles_dyn });
   }
 
   extractSlides() {
@@ -94,7 +109,8 @@ class SlideGenerator extends Component {
         descriptions: [],
         id: [],
         images: [],
-        texts: []
+        links: [],
+        titles: []
       },
       slides_extract = me.state.slides;
 
@@ -104,7 +120,8 @@ class SlideGenerator extends Component {
       slides.descriptions.push(slide.description);
       slides.id.push(slide.id);
       slides.images.push(slide.image);
-      slides.texts.push(slide.title);
+      slides.links.push(slide.link);
+      slides.titles.push(slide.title);
     }
 
     return slides;
@@ -139,14 +156,16 @@ class SlideGenerator extends Component {
   render_dynamic() {
     const me = this,
       images = me.state.images,
-      texts = me.state.texts,
+      links = me.state.links,
+      titles = me.state.titles,
       descriptions = me.state.descriptions;
 
     return (
       <div>
         { descriptions }
+        { links }
         { images }
-        { texts }
+        { titles }
       </div>
     );
   }
