@@ -35,14 +35,17 @@ exports.init = () => {
       $('.slideshow-right .slider').slick('slickGoTo', -1);
       $('.slideshow-text').slick('slickGoTo', maxItems);
       $('.slideshow-description').slick('slickGoTo', maxItems);
+      $('.slideshow-link').slick('slickGoTo', maxItems);
     } else if (currentSlide < nextSlide && currentSlide === 0 && nextSlide === maxItems - 1) {
       $('.slideshow-right .slider').slick('slickGoTo', maxItems);
       $('.slideshow-text').slick('slickGoTo', -1);
       $('.slideshow-description').slick('slickGoTo', -1);
+      $('.slideshow-link').slick('slickGoTo', -1);
     } else {
       $('.slideshow-right .slider').slick('slickGoTo', maxItems - 1 - nextSlide);
       $('.slideshow-text').slick('slickGoTo', nextSlide);
       $('.slideshow-description').slick('slickGoTo', nextSlide);
+      $('.slideshow-link').slick('slickGoTo', nextSlide);
     }
   }).on('mousewheel', function(event) {
     event.preventDefault();
@@ -86,6 +89,14 @@ exports.init = () => {
     vertical: true
   });
   $('.slideshow-description').slick({
+    arrows: false,
+    cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
+    infinite: true,
+    speed: 900,
+    swipe: false,
+    vertical: true
+  });
+  $('.slideshow-link').slick({
     arrows: false,
     cssEase: 'cubic-bezier(0.7, 0, 0.3, 1)',
     infinite: true,

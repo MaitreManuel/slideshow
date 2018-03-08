@@ -10,10 +10,6 @@ class Root extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log('React loaded');
-  }
-
   render() {
     return (<SlideGenerator/>);
   }

@@ -4,7 +4,6 @@
 // Root config
 @import "tool/font";
 @import "tool/animation";
-@import "tool/tooltip";
 
 // External libs
 @import "~bootstrap/scss/functions";
@@ -27,6 +26,32 @@ body, html {
     font-family: 'Roboto', sans-serif;
     overflow: hidden;
 }
+.btn-ovale {
+    border-radius: 20px;
+    font-size: 1rem;
+    height: 38px;
+    padding: .55rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    &.btn-primary {
+        border: 1px solid $red;
+        background-color: $red;
+        color: $white;
+        &:hover {
+            background-color: $white;
+            color: $red;
+        }
+    }
+}
 .d-none {
     display: none !important;
+}
+.links {
+    color: $white;
+}
+.mt-3 {
+    margin-top: 2rem;
+}
+.text-right {
+    text-align: right;
 }
