@@ -60,4 +60,8 @@ export default class slideManager {
     });
   }
 
+  deleteSlide (id) {
+    return firebase.database().ref('/slides/' + id).remove();
+  }
+
 }

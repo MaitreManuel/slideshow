@@ -64,6 +64,16 @@ exports.init = () => {
   });
 
   /*
+  * Supprimer une slide
+  * */
+  document.querySelector('#remove').addEventListener('click', () => {
+    const idToDelete = getInfo().slideId;
+    sManager.deleteSlide(idToDelete).then(
+      window.location.reload()
+    );
+  });
+
+  /*
   * Permet de cloner une image (pour la mettre dans l'admin)
   * */
   const cloneSlide = () => {
