@@ -27,9 +27,43 @@
                 margin-bottom: 15px;
             }
         }
-        #admin-img {
-            img {
-                width: 100%;
+        .input-group {
+            margin-bottom: 15px;
+            #admin-img {
+                img {
+                    width: 100%;
+                }
+            }
+            svg {
+                vertical-align: sub;
+            }
+            #tl + svg {
+                -webkit-transform: rotate(-90deg);
+                -moz-transform: rotate(-90deg);
+                -ms-transform: rotate(-90deg);
+                -o-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+            }
+            #tr + svg {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            #br + svg {
+                -webkit-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+            #bl + svg {
+                -webkit-transform: rotate(180deg);
+                -moz-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                transform: rotate(180deg);
             }
         }
     }

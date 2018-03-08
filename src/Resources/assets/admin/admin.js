@@ -26,7 +26,9 @@ exports.init = () => {
       // descHTML = document.querySelector('#slides-desc').innerHTML,
       // linkHTML = document.querySelector('#slides-link').innerHTML;
 
-    console.log(imgHTML);
+    adminImg.innerHTML = '';
+    adminTitle.innerHTML = '';
+
     adminImg.appendChild(imgHTML);
     adminTitle.value = titleHTML;
     adminDesc.value= 'test';
