@@ -97,7 +97,7 @@ exports.init = () => {
         imgHTML: document.querySelector('#slides-image .slick-current .item img'),
         titleHTML:document.querySelector('#slides-text .slick-current .item').innerHTML,
         descHTML: document.querySelector('#slides-description .slick-current .item').innerHTML,
-        linkHTML: document.querySelector('#slides-link .slick-current .item').innerHTML
+        linkHTML: document.querySelector('#slides-link .slick-current .item a').innerHTML
       };
     } else if (which === 'admin') {
       return {
