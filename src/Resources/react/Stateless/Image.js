@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 
 const slides_image = document.querySelector('#slides-image');
 
-const Image = ({ src }) => {
+const Image = ({ src, id }) => {
   let template =
     <div className="item">
-      <img src={ src } />
+      <img data-id={ id } src={ src } />
     </div>
   ;
 

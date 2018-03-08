@@ -26,12 +26,6 @@ body, html {
     font-family: 'Roboto', sans-serif;
     overflow: hidden;
 }
-
-.slideshow-text {
-    .slick-slide {
-        margin: 27px 0;
-    }
-    .slick-list {
-        margin: -27px 0;
-    }
+.d-none {
+    display: none !important;
 }
