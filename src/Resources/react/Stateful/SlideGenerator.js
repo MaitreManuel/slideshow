@@ -162,9 +162,9 @@ class SlideGenerator extends Component {
 
     return (
       <div>
-        { descriptions }
-        { links }
-        { images }
+        {/* { descriptions } */}
+        {/* { links } */}
+        {/* { images } */}
         { titles }
       </div>
     );
