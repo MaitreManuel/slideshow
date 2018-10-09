@@ -5,7 +5,7 @@ const slides_link = document.querySelector('#slides-link');
 
 const Image = ({ link, title }) => {
   let template =
-    <div className="item">
+    <div className="item d-none">
       <a href={ link } target="_blank" className="links">{ 'Page vers '+ title }</a>
     </div>
   ;
